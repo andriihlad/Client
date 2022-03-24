@@ -34,7 +34,6 @@ export class NewProductPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(Date())
     this.id = this.route.snapshot.params['id']
     if (this.id == "new") {
       this.creationStatus = "new"
@@ -44,7 +43,6 @@ export class NewProductPageComponent implements OnInit {
         this.selectedCategory = this.product.category
         this.selectedSize = this.product.size 
       })
-
     }
     this.sharedService.getCategories("").subscribe(data => {this.categories = data})
     this.sharedService.getSizes("").subscribe(data => {this.sizes = data})
@@ -54,14 +52,13 @@ export class NewProductPageComponent implements OnInit {
     try{
       if(this.id == "new"){
         
-      console.log("new product")
-      let product : Product = new Product(productName, +quantity, +price, description,this.datePipe.transform(this.datePipeString, "MM/dd/YY")  || ""  ,  this.selectedCategory,  this.selectedSize)
-      console.log(this.datePipeString)
+      let product : Product = new Product(productName, +quantity, +price, description, this.datePipe.transform(this.datePipeString, "MM/dd/YY")  || ""  ,  this.selectedCategory,  this.selectedSize)
+    
       this.productService.postProduct(product, "").subscribe()
       this.alertService.success("New product successfully added ")
     }
     else{
-      console.log("Edited product with id:")
+      this.alertService.success("Product Edited!")
       console.log(+this.id)
       let product : ProductModel = new ProductModel(+this.id, productName, +quantity, +price, description,this.product.creationDate,  this.selectedCategory,  this.selectedSize)
       this.productService.putProduct(product).subscribe(data => console.log(data))

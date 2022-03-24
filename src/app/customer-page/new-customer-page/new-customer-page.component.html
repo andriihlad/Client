@@ -12,14 +12,14 @@
         <p class="align-bottom" >{{datePipeString}}</p>
     </div>
 </div>
-<form >
+<form formGroup="customerForm" >
     <div class="row mb-2 gx-0">
         <div class="col-2" >
             <span class="align-middle">Customer Name:</span>
         </div>
         <div class="col-3">
             <div class="form-group mb-3">
-                <input  id="customerName" #customerName (change)="log(customerName.value)" type="text" name="customerName" class="form-control" placeholder="Name" aria-label="Username" >
+                <input type="text" name="productName" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" #customerName>
             </div>
         </div>
     </div>
@@ -29,7 +29,7 @@
         </div>
         <div class="col-4">
             <div class="form-group mb-3">
-                <textarea id="address" class="form-control" name="description" placeholder="Type here"aria-label="With textarea" #address></textarea> 
+                <textarea class="form-control" name="description" placeholder="Type here"aria-label="With textarea" #address></textarea> 
             </div>
         </div>
     </div>
@@ -38,7 +38,7 @@
             <button class="btn btn-primary" type="submit" routerLinkActive="active" (click)="onSave(customerName.value, address.value)">Save</button>
         
         </div>
-        <div class="col-1   text-end">
+        <div class="col-1   text-end">  
             <button class="btn btn-primary " type="submit" routerLinkActive="active" routerLink="/products"  >Cancel</button>
         
         </div>

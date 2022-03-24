@@ -3,6 +3,7 @@ import { CustomerTableHeaders, environment } from 'src/environments/environment.
 import { FormBuilder, FormGroup,  ReactiveFormsModule , NgModel } from '@angular/forms';
 import { CustomerModel } from '../models/customer.model';
 import { CustomerService } from '../shared/customers.service';
+import { AlertService } from '../alert/alert.service';
 
 @Component({
   selector: 'app-customer-page',
@@ -12,19 +13,22 @@ import { CustomerService } from '../shared/customers.service';
 export class CustomerPageComponent implements OnInit {
   CustomerTableHeaders :string[]
   Customers: CustomerModel[]
-  constructor(public customerService: CustomerService) { }
+  constructor(public customerService: CustomerService, private alertService: AlertService) { }
 
   ngOnInit(): void {
     this.CustomerTableHeaders = CustomerTableHeaders
     this.customerService.getCustomers("").subscribe(data => this.Customers = data)
   }
   async onDelete(id: number){
-    (await this.customerService.deleteCustomer(id)).subscribe(data => {
-      var index = this.Customers.findIndex(x=> x.id == (data as CustomerModel).id)
-      this.Customers.splice(index,1)
-    })
-
-    
+    (await this.customerService.deleteCustomer(id)).subscribe(
+      (data) => {
+        var index = this.Customers.findIndex(x=> x.id == (data as CustomerModel).id)
+        this.Customers.splice(index,1)
+      },
+      (error) => {                    
+        this.alertService.error(error)
+      }
+    )
   }
 
 }

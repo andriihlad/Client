@@ -28,13 +28,13 @@
             </div>
         </div>
     </ng-template>
-    <div class="row mb-2 gx-0">
-        <div class="col-2" >
-            <span class="align-middle">Product Name:</span>
+    <div class="row mb-2 gx-0  form-group required">
+        <div class="col-2 " >
+            <label class="align-middle control-label">Product Name:</label>
         </div>
         <div class="col-3">
             <div class="input-group mb-3">
-                <input type="text" name="productName" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" [value]="creationStatus == 'new' ? '' : product?.name" #productName>
+                <input type="text" name="productName" class="form-control " placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" [value]="creationStatus == 'new' ? '' : product?.name" #productName>
               </div>
         </div>
     </div>
@@ -42,9 +42,17 @@
         <div class="col-2">
             <span class="align-middle">Product Category: </span>
         </div>
-        <div class="col ">
-            <div ngbDropdown class="d-inline-block">
-                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle #selectedValue>{{selectedCategory?.category|| "Select Category"}}</button>
+    
+        <div class="col-3 ">
+            <style>.dropdown-toggle::after {
+                margin:0;
+                position: absolute;
+                top:50%;
+                right: 8px;
+            }</style>
+            <div ngbDropdown class="d-inline-block  form-control" style="padding:0; border:none;">
+              
+                <button class="btn btn-outline-primary " style="width: 100%;"id="dropdownBasic1" ngbDropdownToggle #selectedValue>{{selectedCategory?.category|| "Select Category"}}</button>
                 <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                     <div *ngFor="let category of categories;" >
                         <button ngbDropdownItem id="option" on-click="selectedCategory=category" >{{category.category}}</button>
@@ -59,9 +67,9 @@
         <div class="col-2">
             <span class="align-middle">Product Size: </span>
         </div>
-        <div class="col ">
-            <div ngbDropdown class="d-inline-block">
-                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{selectedSize?.size  || "Select Size"}}</button>
+        <div class="col-3 ">
+            <div ngbDropdown class="d-inline-block  form-control "  style="padding:0; border:none;">
+                <button class="btn btn-outline-primary" style="width: 100%;" id="dropdownBasic1" ngbDropdownToggle>{{selectedSize?.size  || "Select Size"}}</button>
                 <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                     <div *ngFor="let size of sizes;" >
                         <button ngbDropdownItem id="option" on-click="selectedSize=size">{{size.size}}</button>
@@ -76,7 +84,7 @@
         <div class="col-2">
             <span class="align-middle">Available Quantity: </span>
         </div>
-        <div class="col-2">
+        <div class="col-3">
                 <input 
                 type="number" 
                 id="amount" 
@@ -91,9 +99,9 @@
         <div class="col-2">
             <span class="align-middle">Price: </span>
         </div>
-        <div class="col-2">
+        <div class="col-3">
                 <input 
-                type="number" 
+                type="number" step=".1"
                 id="amount" 
                 class="form-control"
                 name="price"
@@ -106,17 +114,17 @@
         <div class="col-2">
             <span >Description: </span>
         </div>
-        <div class="col-4">
+        <div class="col-3">
             <div class="input-group mb-3">
                 <textarea class="form-control" name="description" placeholder="Type here"aria-label="With textarea" #description>{{creationStatus == 'new' ? '' : product?.description}}</textarea> </div>
         </div>
     </div>
     <div class="row  mb-3 ">
-        <div class="col-10  text-end ">
-            <button class="btn btn-primary" type="submit" routerLinkActive="active"  (click)="onSave(productName.value, qty.value, price.value, description.value)">{{creationStatus == 'new' ? 'Save' : 'Edit'}}</button>
+        <div class="col-1 ">
+            <button class="btn btn-primary" type="submit" routerLinkActive="active"  (click)="onSave(productName.value, qty.value, price.value, description.value)">Save</button>
        
         </div>
-        <div class="col-1   text-end">
+        <div class="col-1  ">
             <button class="btn btn-primary " type="submit" routerLinkActive="active" routerLink="/products"  >Cancel</button>
        
         </div>

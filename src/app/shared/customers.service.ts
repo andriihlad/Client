@@ -8,7 +8,7 @@ import { Customer } from '../models/serverModel/customer';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdModalContent } from './dialogBoxContent';
 
-@Injectable() 
+@Injectable({providedIn: 'root'}) 
 export class CustomerService {
     constructor(private http: HttpClient, private modalService: NgbModal) {
         
@@ -21,7 +21,7 @@ export class CustomerService {
     postCustomer(customer: Customer, params: string ): Observable<CustomerModel> {
         return this.http.post<CustomerModel>(environment.baseUrl+ApiPaths.Customers + params, customer)
     }
-    async deleteCustomer(id: number){
+    async deleteCustomer(id: number): Promise<Observable<CustomerModel>>{
         const modalRef = this.modalService.open(NgbdModalContent);
         if (await modalRef.result) {
             return this.http.delete<CustomerModel>(environment.baseUrl+ApiPaths.Customers + "/"+id)

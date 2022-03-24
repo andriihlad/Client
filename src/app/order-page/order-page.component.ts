@@ -17,8 +17,9 @@ export class OrderPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.OrderTableHeaders = OrderTableHeaders
-    this.customerService.getCustomers().subscribe(data => this.Orders = data)
-   
+    this.customerService.getOrders().subscribe(data => {this.Orders = data
+    })
+    
   }
 }
 

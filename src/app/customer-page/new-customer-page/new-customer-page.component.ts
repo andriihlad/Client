@@ -16,9 +16,6 @@ export class NewCustomerPageComponent implements OnInit {
   customerForm:FormGroup
 
   customer: Customer
-log(x: string){
-  console.log(x)
-}
 
   constructor(private customerService: CustomerService,
      private alertService: AlertService, 
